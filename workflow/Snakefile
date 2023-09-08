@@ -1,0 +1,19 @@
+import sys
+from pathlib import Path
+
+from snakemake.utils import min_version
+
+min_version("7.0")
+
+
+rule all:
+    output:
+        "results/result.out",
+    params:
+        script=workflow.source_path("scripts/myscript.py"),
+    message:
+        "Generate output"
+    shell:
+        """touch {output:q}
+        python {params.script}
+        """

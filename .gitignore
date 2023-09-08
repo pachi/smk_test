@@ -1,0 +1,6 @@
+.snakemake/
+**/run/
+**/reports/
+
+results/
+resources/
