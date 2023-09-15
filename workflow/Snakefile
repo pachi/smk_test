@@ -1,5 +1,3 @@
-import os
-import sys
 from pathlib import Path
 
 from snakemake.utils import min_version
@@ -7,18 +5,15 @@ from snakemake.utils import min_version
 min_version("7.0")
 
 
-SCRIPTS_DIR = os.path.join(workflow.basedir, "scripts")
-
 rule all:
     output:
         "results/result.out",
     params:
-        script=workflow.source_path("scripts/myscript.py"),
+        script=Path(workflow.basedir) / "scripts" / "myscript.py",
     message:
         "Generate output"
     shell:
         """
-        export PYTHONPATH={SCRIPTS_DIR}
         touch {output:q}
         python {params.script}
         """
